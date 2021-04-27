@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<body>
+
+</body>
+<script>
+    $(document).ready(() => {
+        const url = "/api/"
+        $.ajax({
+            url: url,
+            type: "GET",
+            data: {
+                "Content-Type": undefined
+            },
+            success: (result) => {
+                icon = result.mongo ? 'ok.png' : 'cancel.png';
+		document.body.innerHTML = '<p>'+result.data+'<br />isMongoAlive: <img src="/'+icon+'" height="48px" /></p>'
+            },
+            error: (err) => {
+                console.log(err)
+            }
+        })
+    })
+</script>
+
+</html>
