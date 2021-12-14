@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: php-apache
+  name: php-apache
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: php-apache
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: php-apache
+    spec:
+      containers:
+      - image: lekamor2006/hpasample
+        name: hpasample
+        resources: 
+          limits: 
+            cpu: 500m
+          requests: 
+            cpu: 200m 
+---
+apiVersion: v1
+kind: Service
+metadata: 
+  name: php-service
+  labels: 
+    run: php-apache
+spec: 
+  ports: 
+  - port: 80
+  selector: 
+    app: php-apache
